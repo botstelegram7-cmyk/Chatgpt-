@@ -15,7 +15,7 @@ async def start_cmd(client, message):
 
 »»──── ✦ ────««
 
-▸ Send any video URL to download
+▸ Send any URL to download
 ▸ Supported: YouTube, Instagram, TikTok
 ▸ Direct files also supported
 
