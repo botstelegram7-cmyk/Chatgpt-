@@ -3,10 +3,13 @@ from client import app
 from database import add_user
 
 
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command("start") & ~filters.outgoing)
 async def start_cmd(client, message):
 
-    await add_user(message.from_user)
+    user = message.from_user
+
+    if user:
+        await add_user(user)
 
     await message.reply_text(
 """⋆｡° ✮ °｡⋆
