@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from pyrogram import idle
 
 from client import app
 from web.app import start_web
@@ -15,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("serena-bot")
 
 
-async def run_bot():
+async def main():
 
     logger.info("Initializing database...")
     await init_db()
@@ -25,8 +26,11 @@ async def run_bot():
 
     logger.info("Bot started successfully")
 
-    # Keep bot alive
-    await asyncio.Event().wait()
+    # This is required for receiving updates
+    await idle()
+
+    logger.info("Stopping bot...")
+    await app.stop()
 
 
 if __name__ == "__main__":
@@ -34,5 +38,4 @@ if __name__ == "__main__":
     # Start Render web server
     start_web()
 
-    # Run bot loop
-    asyncio.run(run_bot())
+    asyncio.run(main())
